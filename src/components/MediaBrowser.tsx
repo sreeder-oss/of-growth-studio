@@ -257,7 +257,11 @@ export const MediaBrowser: React.FC<MediaBrowserProps> = ({
         {filtered.map((item) => {
           const isSelected = selectedSet.has(item.id);
           const isUsed = usedSet.has(item.id);
-          const thumbSrc = item.localDataUrl || item.thumbnailUrl;
+          const resolvedThumb =
+            item.thumbnailUrl && item.thumbnailUrl.startsWith('/')
+              ? `${import.meta.env.BASE_URL}${item.thumbnailUrl.slice(1)}`
+              : item.thumbnailUrl;
+          const thumbSrc = item.localDataUrl || resolvedThumb;
 
           return (
             <button

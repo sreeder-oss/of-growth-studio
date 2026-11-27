@@ -160,7 +160,7 @@ export function App() {
       <aside className="sidebar">
         <div className="brand-lockup">
           <img
-            src="/brand/of-logo.png"
+            src={`${import.meta.env.BASE_URL}brand/of-logo.png`}
             alt="Organic Finishes — Paint & Plaster"
             className="brand-logo-img"
           />
@@ -215,7 +215,12 @@ export function App() {
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
         <header className="mobile-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <img src="/icon.svg" alt="OF Growth Studio" width={30} height={30} />
+            <img
+              src={`${import.meta.env.BASE_URL}icon.svg`}
+              alt="OF Growth Studio"
+              width={30}
+              height={30}
+            />
             <div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: 17, lineHeight: 1.1 }}>
                 Organic Finishes

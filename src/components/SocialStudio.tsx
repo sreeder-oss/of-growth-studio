@@ -97,7 +97,8 @@ export const SocialStudio: React.FC<SocialStudioProps> = ({
         if (m.localDataUrl) {
           imageDataUrls.push(m.localDataUrl);
         } else if (m.thumbnailUrl && m.thumbnailUrl.startsWith('/')) {
-          const dataUrl = await fetchLocalThumbAsDataUrl(m.thumbnailUrl);
+          const resolved = `${import.meta.env.BASE_URL}${m.thumbnailUrl.slice(1)}`;
+          const dataUrl = await fetchLocalThumbAsDataUrl(resolved);
           if (dataUrl) imageDataUrls.push(dataUrl);
         } else if (settings.driveConnected && settings.driveAccessToken) {
           const dataUrl = await fetchDriveImageAsDataUrl(m.id, settings.driveAccessToken);
@@ -259,7 +260,12 @@ export const SocialStudio: React.FC<SocialStudioProps> = ({
                   >
                     {(m.localDataUrl || m.thumbnailUrl) && (
                       <img
-                        src={m.localDataUrl || m.thumbnailUrl}
+                        src={
+                          m.localDataUrl ||
+                          (m.thumbnailUrl?.startsWith('/')
+                            ? `${import.meta.env.BASE_URL}${m.thumbnailUrl.slice(1)}`
+                            : m.thumbnailUrl)
+                        }
                         alt={m.title}
                         style={{
                           width: 48,
